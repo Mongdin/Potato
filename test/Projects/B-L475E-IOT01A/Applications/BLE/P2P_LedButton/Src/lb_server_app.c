@@ -181,7 +181,7 @@ void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification)
         break;
         */
     case POTATO_SSID_EVT:
-
+    	//
     	break;
     case POTATO_PW_EVT:
 

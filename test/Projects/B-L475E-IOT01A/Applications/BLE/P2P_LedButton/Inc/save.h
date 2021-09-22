@@ -16,8 +16,7 @@ struct save {
 	uint8_t myPW[30];
 	uint8_t myDeviceName[30];
 	uint8_t myIP[4];
-	uint8_t myPeriod;
-	uint8_t myOption;
+	uint8_t myPeriod[2];
 } save_t;
 
 

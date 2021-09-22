@@ -144,6 +144,46 @@ static SVCCTL_EvtAckStatus_t LedButton_Event_Handler(void *Event)
                           Notification.DataTransfered.pPayload=attribute_modified->att_data;
                           LBS_App_Notification(&Notification);
                         }
+
+            if(attribute_modified->attr_handle == (testingtestContext.testing_PW_Hdle + 1))
+                        {
+                          //value handle
+                          APPL_MESG_DBG("-- GATT : RECEIVED\n");
+                          Notification.LBS_Evt_Opcode = POTATO_PW_EVT;
+                          Notification.DataTransfered.Length=attribute_modified->data_length;
+                          Notification.DataTransfered.pPayload=attribute_modified->att_data;
+                          LBS_App_Notification(&Notification);
+                        }
+
+            if(attribute_modified->attr_handle == (testingtestContext.testing_NAME_Hdle + 1))
+                        {
+                          //value handle
+                          APPL_MESG_DBG("-- GATT : RECEIVED\n");
+                          Notification.LBS_Evt_Opcode = POTATO_NAME_EVT;
+                          Notification.DataTransfered.Length=attribute_modified->data_length;
+                          Notification.DataTransfered.pPayload=attribute_modified->att_data;
+                          LBS_App_Notification(&Notification);
+                        }
+
+            if(attribute_modified->attr_handle == (testingtestContext.testing_IP_Hdle + 1))
+                        {
+                          //value handle
+                          APPL_MESG_DBG("-- GATT : RECEIVED\n");
+                          Notification.LBS_Evt_Opcode = POTATO_IP_EVT;
+                          Notification.DataTransfered.Length=attribute_modified->data_length;
+                          Notification.DataTransfered.pPayload=attribute_modified->att_data;
+                          LBS_App_Notification(&Notification);
+                        }
+
+            if(attribute_modified->attr_handle == (testingtestContext.testing_OP_Hdle + 1))
+                        {
+                          //value handle
+                          APPL_MESG_DBG("-- GATT : RECEIVED\n");
+                          Notification.LBS_Evt_Opcode = POTATO_OP_EVT;
+                          Notification.DataTransfered.Length=attribute_modified->data_length;
+                          Notification.DataTransfered.pPayload=attribute_modified->att_data;
+                          LBS_App_Notification(&Notification);
+                        }
             ////////////////////////////////////////////////////////////////////////////////////
 
           
