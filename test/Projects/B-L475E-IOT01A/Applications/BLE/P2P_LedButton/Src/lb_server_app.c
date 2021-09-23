@@ -28,6 +28,8 @@
 #include "blesvc.h"
 #include "scheduler.h"
 #include "stm32l475e_iot01.h"
+#include <stdbool.h>
+
 
 
 #if (LB_SERVER != 0) /**< LED BOUTTON END DEVICE APPLICATION  */
@@ -47,7 +49,9 @@ typedef struct
 	uint8_t POTATO_PW[30];
 	uint8_t POTATO_NAME[30];
 	uint8_t POTATO_IP[4];
-	uint8_t POTATO_OP[2];
+	uint8_t POTATO_Period;
+	//uint8_t POTATO_OP;
+	bool POTATO_CS_EN;
 }POTATO_Context_t;
 
 
@@ -145,6 +149,15 @@ void LB_App_Button_Trigger_Received(void)
   * @param  pNotification: LBS notification.
   * @retval None
  */ 
+
+void whynotwork(uint8_t *POTATO, LBS_App_Notification_evt_t *pNotification)
+{
+	for(uint8_t i = 0; i < pNotification->DataTransfered.Length; i++)
+	{
+		POTATO[i] = pNotification->DataTransfered.pPayload[i];
+	}
+}
+
 void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification)
 {
 	//uint8_t buffer[]
@@ -181,19 +194,20 @@ void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification)
         break;
         */
     case POTATO_SSID_EVT:
-    	//
+    	whynotwork(POTATO_Context.POTATO_SSID,pNotification);
+    	//aci_gatt_write_charac_value(0xFFFE, attr_hdle, 30, POTATO_Context.POTATO_SSID);
     	break;
     case POTATO_PW_EVT:
-
+    	whynotwork(POTATO_Context.POTATO_PW,pNotification);
     	break;
     case POTATO_NAME_EVT:
-
+    	whynotwork(POTATO_Context.POTATO_NAME,pNotification);
     	break;
     case POTATO_IP_EVT:
-
+    	whynotwork(POTATO_Context.POTATO_IP,pNotification);
     	break;
     case POTATO_OP_EVT:
-
+    	whynotwork(POTATO_Context.POTATO_OP,pNotification);
     	break;
 
 

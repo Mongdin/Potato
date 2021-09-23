@@ -66,6 +66,7 @@ typedef struct
 /* Exported functions ------------------------------------------------------- */
 void LBS_STM_Init(void);
 void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification);
+//void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification, uint16_t attr_hdle);
 tBleStatus BLE_SVC_LedButton_Update_Char(uint16_t UUID,  uint8_t *pPayload);
 
 

@@ -143,8 +143,9 @@ static SVCCTL_EvtAckStatus_t LedButton_Event_Handler(void *Event)
                           Notification.DataTransfered.Length=attribute_modified->data_length;
                           Notification.DataTransfered.pPayload=attribute_modified->att_data;
                           LBS_App_Notification(&Notification);
-                        }
 
+                        }
+/*
             if(attribute_modified->attr_handle == (testingtestContext.testing_PW_Hdle + 1))
                         {
                           //value handle
@@ -185,7 +186,7 @@ static SVCCTL_EvtAckStatus_t LedButton_Event_Handler(void *Event)
                           LBS_App_Notification(&Notification);
                         }
             ////////////////////////////////////////////////////////////////////////////////////
-
+*/
           
         }
         break;
@@ -300,9 +301,18 @@ void LBS_STM_Init(void)
                             1, /* isVariable */
                             &(testingtestContext.testing_OP_Hdle));
       uuid = testingtest_OPwDesc_UUID;
-      uint8_t testingDesc[] = "testing";
-      aci_gatt_add_char_desc(testingtestContext.testing_Svc_Hdle, testingtestContext.testing_IP_Hdle, UUID_TYPE_16, (const uint8_t *) &uuid, 10, 8, testingDesc, ATTR_PERMISSION_NONE, ATTR_ACCESS_READ_WRITE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(testingtestContext.testing_OPwDesc_Hdle));
+      aci_gatt_add_char(testingtestContext.testing_Svc_Hdle,
+                                  UUID_TYPE_16,
+                                  (const uint8_t *) &uuid ,
+                                  30,
+								  CHAR_PROP_NOTIFY|CHAR_PROP_READ,
+                                  ATTR_PERMISSION_NONE,
+                                  GATT_NOTIFY_ATTRIBUTE_WRITE, /* gattEvtMask */
+                                  10, /* encryKeySize */
+                                  1, /* isVariable */
+                                  &(testingtestContext.testing_OPwDesc_Hdle));
 
+      //aci_gatt_write_charac_value(conn_handle, attr_handle, value_len, attr_value)
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -393,26 +403,27 @@ tBleStatus BLE_SVC_LedButton_Update_Char(uint16_t UUID, uint8_t *pPayload) //LED
   * @param  pNotification: LBS notification.
   * @retval None
  */ 
+
 __weak void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification)
 {
   switch(pNotification->LBS_Evt_Opcode)
   {
     case BUTTON_NOTIFY_ENABLED_EVT:
-      /* Application to fill this code */    
+      // Application to fill this code
       break;
 
     case BUTTON_NOTIFY_DISABLED_EVT:
-      /* Application to fill this code */ 
+      // Application to fill this code
       break;
 
     case ST_SVC_LED_READ_EVT:
-      /* Application to fill this code */ 
-      /*Create Function to respond to Client-LB Routeur the status of each Led*/
+      // Application to fill this code
+      //Create Function to respond to Client-LB Routeur the status of each Led
       break;
 
     case ST_SVC_LED_WRITE_EVT:
-      /* Application to fill this code */ 
-      /* create function to switch ON/OFF Leds on selected device. */
+      // Application to fill this code
+      // create function to switch ON/OFF Leds on selected device.
       break;
 
     default:
