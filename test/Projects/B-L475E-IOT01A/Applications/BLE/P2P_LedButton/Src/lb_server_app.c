@@ -30,6 +30,9 @@
 #include "stm32l475e_iot01.h"
 #include <stdbool.h>
 
+#include "save.h"
+
+extern POTATO_Context_t POTATO_Context;
 
 
 #if (LB_SERVER != 0) /**< LED BOUTTON END DEVICE APPLICATION  */
@@ -43,16 +46,7 @@ typedef struct
 } LB_End_Dev_Context_t;
 
 
-typedef struct
-{
-	uint8_t POTATO_SSID[30];
-	uint8_t POTATO_PW[30];
-	uint8_t POTATO_NAME[30];
-	uint8_t POTATO_IP[4];
-	uint8_t POTATO_Period;
-	//uint8_t POTATO_OP;
-	bool POTATO_CS_EN;
-}POTATO_Context_t;
+volatile save_ret ret = 0;
 
 
 /* Private defines -----------------------------------------------------------*/
@@ -64,7 +58,7 @@ typedef struct
  * START of Section BLE_APP_CONTEXT
  */
 static LB_End_Dev_Context_t LB_End_Dev_Context;
-static POTATO_Context_t POTATO_Context;
+
 /**
  * END of Section BLE_APP_CONTEXT
  */
@@ -196,6 +190,7 @@ void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification)
     case POTATO_SSID_EVT:
     	whynotwork(POTATO_Context.POTATO_SSID,pNotification);
     	//aci_gatt_write_charac_value(0xFFFE, attr_hdle, 30, POTATO_Context.POTATO_SSID);
+    	//ret = Potato_Save(&POTATO_Context);
     	break;
     case POTATO_PW_EVT:
     	whynotwork(POTATO_Context.POTATO_PW,pNotification);
@@ -216,6 +211,7 @@ void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification)
     default:
       break;
   }
+  ret = Potato_Save(&POTATO_Context);
   return;
 }
 

@@ -145,7 +145,7 @@ static SVCCTL_EvtAckStatus_t LedButton_Event_Handler(void *Event)
                           LBS_App_Notification(&Notification);
 
                         }
-/*
+
             if(attribute_modified->attr_handle == (testingtestContext.testing_PW_Hdle + 1))
                         {
                           //value handle
@@ -186,7 +186,7 @@ static SVCCTL_EvtAckStatus_t LedButton_Event_Handler(void *Event)
                           LBS_App_Notification(&Notification);
                         }
             ////////////////////////////////////////////////////////////////////////////////////
-*/
+
           
         }
         break;

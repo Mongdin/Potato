@@ -1,5 +1,5 @@
-Application/Common/hw_interface/save.o: \
- ../Application/Common/hw_interface/save.c ../../../Inc/save.h \
+Application/P2P_LB_Example/save.o: ../Application/P2P_LB_Example/save.c \
+ ../../../Inc/save.h \
  d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal.h \
  ../../../Inc/stm32l4xx_hal_conf.h \
  d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_rcc.h \
@@ -35,7 +35,8 @@ Application/Common/hw_interface/save.o: \
  d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_spi.h \
  d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_spi_ex.h \
  d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_uart.h \
- d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_uart_ex.h
+ d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_uart_ex.h \
+ d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash_ex.h
 
 ../../../Inc/save.h:
 
@@ -110,3 +111,5 @@ d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_spi_ex.h:
 d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_uart.h:
 
 d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_uart_ex.h:
+
+d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash_ex.h:

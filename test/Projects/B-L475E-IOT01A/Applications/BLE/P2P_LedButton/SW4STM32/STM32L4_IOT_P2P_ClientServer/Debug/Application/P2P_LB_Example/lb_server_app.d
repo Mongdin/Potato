@@ -66,7 +66,8 @@ Application/P2P_LB_Example/lb_server_app.o: \
  ../../../../Common/ble_services/hrs.h \
  ../../../../Common/ble_services/lbs_stm.h \
  ../../../../Common/utilities/scheduler.h \
- d:\git\potato\test\drivers\bsp\b-l475e-iot01\stm32l475e_iot01.h
+ d:\git\potato\test\drivers\bsp\b-l475e-iot01\stm32l475e_iot01.h \
+ ../../../Inc/save.h
 
 ../../../../Common/common.h:
 
@@ -209,3 +210,5 @@ d:\git\potato\test\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_dma.h:
 ../../../../Common/utilities/scheduler.h:
 
 d:\git\potato\test\drivers\bsp\b-l475e-iot01\stm32l475e_iot01.h:
+
+../../../Inc/save.h:

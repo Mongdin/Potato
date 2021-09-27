@@ -1,0 +1,2 @@
+save.c:29:10:Potato_Save	56	static,ignoring_inline_asm
+save.c:77:6:Potato_Load	0	static

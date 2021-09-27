@@ -46,7 +46,7 @@
  * START of Section APP_CONTEXT
  */
 static RTC_HandleTypeDef hrtc;  /**< RTC handler declaration */
-
+POTATO_Context_t POTATO_Context;
 /**
  * END of Section APP_CONTEXT
  */
@@ -163,11 +163,13 @@ int main(void)
   /**
    * BLE application start
    */
+  Potato_Load(&POTATO_Context);
   LBR_Init(LBR_Full);
   
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
   BSP_LED_Init(LED2);
   
+
   /* Start the main processes */
   while(1)
   {
