@@ -42,7 +42,7 @@ typedef struct{
   uint16_t  testing_NAME_Hdle;
   uint16_t  testing_IP_Hdle;
   uint16_t  testing_OP_Hdle;				  /**< Characteristic handle */
-  uint16_t  testing_OPwDesc_Hdle;
+  uint16_t  testing_Save_Hdle;
 
 }testingtestContext_t;
 
@@ -185,7 +185,16 @@ static SVCCTL_EvtAckStatus_t LedButton_Event_Handler(void *Event)
                           Notification.DataTransfered.pPayload=attribute_modified->att_data;
                           LBS_App_Notification(&Notification);
                         }
-            ////////////////////////////////////////////////////////////////////////////////////
+            if(attribute_modified->attr_handle == (testingtestContext.testing_Save_Hdle + 1))
+                        {
+                          //value handle
+                          APPL_MESG_DBG("-- GATT : RECEIVED\n");
+                          Notification.LBS_Evt_Opcode = POTATO_SAVE_EVT;
+                          Notification.DataTransfered.Length=attribute_modified->data_length;
+                          Notification.DataTransfered.pPayload=attribute_modified->att_data;
+                          LBS_App_Notification(&Notification);
+                        }
+            ////////////////////////////////////////////////////////////////////////////////////testing_Save_Hdle
 
           
         }
@@ -293,24 +302,24 @@ void LBS_STM_Init(void)
       aci_gatt_add_char(testingtestContext.testing_Svc_Hdle,
                             UUID_TYPE_16,
                             (const uint8_t *) &uuid ,
-                            2,
+                            3,
                             CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
                             ATTR_PERMISSION_NONE,
                             GATT_NOTIFY_ATTRIBUTE_WRITE, /* gattEvtMask */
                             10, /* encryKeySize */
                             1, /* isVariable */
                             &(testingtestContext.testing_OP_Hdle));
-      uuid = testingtest_OPwDesc_UUID;
+      uuid = testingtest_Save_UUID;
       aci_gatt_add_char(testingtestContext.testing_Svc_Hdle,
                                   UUID_TYPE_16,
                                   (const uint8_t *) &uuid ,
-                                  30,
-								  CHAR_PROP_NOTIFY|CHAR_PROP_READ,
-                                  ATTR_PERMISSION_NONE,
-                                  GATT_NOTIFY_ATTRIBUTE_WRITE, /* gattEvtMask */
+                                  1,
+								  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
+								  ATTR_PERMISSION_NONE,
+								  GATT_NOTIFY_ATTRIBUTE_WRITE, /* gattEvtMask */
                                   10, /* encryKeySize */
                                   1, /* isVariable */
-                                  &(testingtestContext.testing_OPwDesc_Hdle));
+                                  &(testingtestContext.testing_Save_Hdle));
 
       //aci_gatt_write_charac_value(conn_handle, attr_handle, value_len, attr_value)
 

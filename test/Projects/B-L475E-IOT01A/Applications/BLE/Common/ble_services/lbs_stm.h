@@ -42,6 +42,7 @@ typedef enum
   POTATO_NAME_EVT,
   POTATO_IP_EVT,
   POTATO_OP_EVT,
+  POTATO_SAVE_EVT,
 
 } LBS_Opcode_evt_t;
 

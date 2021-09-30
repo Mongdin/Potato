@@ -6247,7 +6247,7 @@ LOAD d:/cubeide/stm32cubeide_1.7.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu
  .debug_line    0x000000000001c436     0x1ab5 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_rtc_ex.o
  .debug_line    0x000000000001deeb     0x2ba4 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_spi.o
 
-.debug_str      0x0000000000000000    0xff483
+.debug_str      0x0000000000000000    0xff480
  .debug_str     0x0000000000000000     0x893b ./Application/Common/ble_core/bluenrg_gap_aci.o
                                        0x8e91 (size before relaxing)
  .debug_str     0x000000000000893b     0x103c ./Application/Common/ble_core/bluenrg_gatt_aci.o
@@ -6256,67 +6256,67 @@ LOAD d:/cubeide/stm32cubeide_1.7.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu
                                        0x8bcb (size before relaxing)
  .debug_str     0x000000000000a676     0x3476 ./Application/Common/ble_core/osal.o
                                        0x6804 (size before relaxing)
- .debug_str     0x000000000000daec    0xe43af ./Application/Common/ble_services/dis.o
-                                      0xf0d48 (size before relaxing)
- .debug_str     0x00000000000f1e9b      0x59b ./Application/Common/ble_services/hrs.o
-                                      0xee0ab (size before relaxing)
- .debug_str     0x00000000000f2436      0x2fc ./Application/Common/ble_services/svc_ctl.o
-                                      0xf1050 (size before relaxing)
- .debug_str     0x00000000000f2732     0x61f9 ./Application/Common/hw_interface/hw_lpm.o
+ .debug_str     0x000000000000daec    0xe43ac ./Application/Common/ble_services/dis.o
+                                      0xf0d45 (size before relaxing)
+ .debug_str     0x00000000000f1e98      0x59b ./Application/Common/ble_services/hrs.o
+                                      0xee0a8 (size before relaxing)
+ .debug_str     0x00000000000f2433      0x2fc ./Application/Common/ble_services/svc_ctl.o
+                                      0xf104d (size before relaxing)
+ .debug_str     0x00000000000f272f     0x61f9 ./Application/Common/hw_interface/hw_lpm.o
                                       0xefd1a (size before relaxing)
- .debug_str     0x00000000000f892b     0x1ecf ./Application/Common/hw_interface/hw_spi.o
+ .debug_str     0x00000000000f8928     0x1ecf ./Application/Common/hw_interface/hw_spi.o
                                       0xf1cbf (size before relaxing)
- .debug_str     0x00000000000fa7fa      0x900 ./Application/Common/hw_interface/hw_timerserver.o
+ .debug_str     0x00000000000fa7f7      0x900 ./Application/Common/hw_interface/hw_timerserver.o
                                       0xf0aeb (size before relaxing)
- .debug_str     0x00000000000fb0fa      0x5f1 ./Application/Common/tl/tl_ble_hci.o
+ .debug_str     0x00000000000fb0f7      0x5f1 ./Application/Common/tl/tl_ble_hci.o
                                       0xeb529 (size before relaxing)
- .debug_str     0x00000000000fb6eb      0x151 ./Application/Common/tl/tl_ble_io.o
+ .debug_str     0x00000000000fb6e8      0x151 ./Application/Common/tl/tl_ble_io.o
                                       0xeff8f (size before relaxing)
- .debug_str     0x00000000000fb83c      0x2dc ./Application/Common/tl/tl_ble_reassembly.o
+ .debug_str     0x00000000000fb839      0x2dc ./Application/Common/tl/tl_ble_reassembly.o
                                       0xeb3ec (size before relaxing)
- .debug_str     0x00000000000fbb18      0x1e3 ./Application/Common/tl/tl_ble_spi.o
+ .debug_str     0x00000000000fbb15      0x1e3 ./Application/Common/tl/tl_ble_spi.o
                                       0xf0171 (size before relaxing)
- .debug_str     0x00000000000fbcfb       0xfc ./Application/Common/utilities/list.o
+ .debug_str     0x00000000000fbcf8       0xfc ./Application/Common/utilities/list.o
                                       0xeb046 (size before relaxing)
- .debug_str     0x00000000000fbdf7      0x1c2 ./Application/Common/utilities/lpm.o
+ .debug_str     0x00000000000fbdf4      0x1c2 ./Application/Common/utilities/lpm.o
                                       0xefe14 (size before relaxing)
- .debug_str     0x00000000000fbfb9       0xc5 ./Application/Common/utilities/memory_manager.o
+ .debug_str     0x00000000000fbfb6       0xc5 ./Application/Common/utilities/memory_manager.o
                                       0xeb040 (size before relaxing)
- .debug_str     0x00000000000fc07e       0xe4 ./Application/Common/utilities/scheduler.o
+ .debug_str     0x00000000000fc07b       0xe4 ./Application/Common/utilities/scheduler.o
                                       0xeb06c (size before relaxing)
- .debug_str     0x00000000000fc162      0x181 ./Application/HR_Example/dis_app.o
-                                      0xf1a22 (size before relaxing)
- .debug_str     0x00000000000fc2e3      0x458 ./Application/HR_Example/hr.o
-                                      0xf7728 (size before relaxing)
- .debug_str     0x00000000000fc73b      0x149 ./Application/HR_Example/hrs_app.o
-                                      0xf6b75 (size before relaxing)
- .debug_str     0x00000000000fc884      0x429 ./Application/HR_Example/main.o
+ .debug_str     0x00000000000fc15f      0x181 ./Application/HR_Example/dis_app.o
+                                      0xf1a1f (size before relaxing)
+ .debug_str     0x00000000000fc2e0      0x458 ./Application/HR_Example/hr.o
+                                      0xf7725 (size before relaxing)
+ .debug_str     0x00000000000fc738      0x149 ./Application/HR_Example/hrs_app.o
+                                      0xf6b72 (size before relaxing)
+ .debug_str     0x00000000000fc881      0x429 ./Application/HR_Example/main.o
                                       0xf093b (size before relaxing)
- .debug_str     0x00000000000fccad      0x134 ./Application/HR_Example/stm32l4xx_it.o
+ .debug_str     0x00000000000fccaa      0x134 ./Application/HR_Example/stm32l4xx_it.o
                                       0xefd41 (size before relaxing)
- .debug_str     0x00000000000fcde1      0x11e ./Application/HR_Example/system_stm32l4xx.o
+ .debug_str     0x00000000000fcdde      0x11e ./Application/HR_Example/system_stm32l4xx.o
                                       0xe55a5 (size before relaxing)
- .debug_str     0x00000000000fceff       0x73 ./Drivers/CMSIS/startup_stm32l475xx.o
+ .debug_str     0x00000000000fcefc       0x73 ./Drivers/CMSIS/startup_stm32l475xx.o
                                          0xd7 (size before relaxing)
- .debug_str     0x00000000000fcf72      0x5b7 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal.o
+ .debug_str     0x00000000000fcf6f      0x5b7 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal.o
                                       0xe6022 (size before relaxing)
- .debug_str     0x00000000000fd529      0x2f2 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_cortex.o
+ .debug_str     0x00000000000fd526      0x2f2 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_cortex.o
                                       0xe5ce1 (size before relaxing)
- .debug_str     0x00000000000fd81b      0x250 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_dma.o
+ .debug_str     0x00000000000fd818      0x250 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_dma.o
                                       0xe56fa (size before relaxing)
- .debug_str     0x00000000000fda6b      0x195 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_gpio.o
+ .debug_str     0x00000000000fda68      0x195 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_gpio.o
                                       0xe5715 (size before relaxing)
- .debug_str     0x00000000000fdc00      0x2ef ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_pwr.o
+ .debug_str     0x00000000000fdbfd      0x2ef ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_pwr.o
                                       0xe5820 (size before relaxing)
- .debug_str     0x00000000000fdeef      0x3cb ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_pwr_ex.o
+ .debug_str     0x00000000000fdeec      0x3cb ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_pwr_ex.o
                                       0xe59c5 (size before relaxing)
- .debug_str     0x00000000000fe2ba      0x330 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_rcc.o
+ .debug_str     0x00000000000fe2b7      0x330 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_rcc.o
                                       0xe5a99 (size before relaxing)
- .debug_str     0x00000000000fe5ea      0x364 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_rtc.o
+ .debug_str     0x00000000000fe5e7      0x364 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_rtc.o
                                       0xe5913 (size before relaxing)
- .debug_str     0x00000000000fe94e      0x599 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_rtc_ex.o
+ .debug_str     0x00000000000fe94b      0x599 ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_rtc_ex.o
                                       0xe5c2e (size before relaxing)
- .debug_str     0x00000000000feee7      0x59c ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_spi.o
+ .debug_str     0x00000000000feee4      0x59c ./Drivers/STM32L4xx_HAL_Drivers/stm32l4xx_hal_spi.o
                                       0xe5c85 (size before relaxing)
 
 .comment        0x0000000000000000       0x53

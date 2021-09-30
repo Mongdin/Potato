@@ -16,6 +16,7 @@
 "./Application/Common/utilities/lpm.o"
 "./Application/Common/utilities/memory_manager.o"
 "./Application/Common/utilities/scheduler.o"
+"./Application/P2P_LB_Example/crc.o"
 "./Application/P2P_LB_Example/lb_client_app.o"
 "./Application/P2P_LB_Example/lb_demo.o"
 "./Application/P2P_LB_Example/lb_server_app.o"

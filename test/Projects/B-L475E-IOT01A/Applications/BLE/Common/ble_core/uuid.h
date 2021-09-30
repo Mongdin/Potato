@@ -212,7 +212,7 @@
 #define testingtest_NAME_UUID                                     (0xFFF2)
 #define testingtest_IP_UUID                                            (0xFFF3)
 #define testingtest_OP_UUID                                            (0xFFF4)
-#define testingtest_OPwDesc_UUID                                            (0xFFF5)
+#define testingtest_Save_UUID                                            (0xFFF5)
 
 
 

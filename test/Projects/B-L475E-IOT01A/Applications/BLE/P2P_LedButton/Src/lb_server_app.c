@@ -46,7 +46,7 @@ typedef struct
 } LB_End_Dev_Context_t;
 
 
-volatile save_ret ret = 0;
+volatile save_ret_t ret = 0;
 
 
 /* Private defines -----------------------------------------------------------*/
@@ -144,12 +144,14 @@ void LB_App_Button_Trigger_Received(void)
   * @retval None
  */ 
 
-void whynotwork(uint8_t *POTATO, LBS_App_Notification_evt_t *pNotification)
+void whynotwork(uint8_t *POTATO, LBS_App_Notification_evt_t *pNotification, uint8_t is_string)
 {
-	for(uint8_t i = 0; i < pNotification->DataTransfered.Length; i++)
+	uint8_t i = 0;
+	for(; i < pNotification->DataTransfered.Length; i++)
 	{
 		POTATO[i] = pNotification->DataTransfered.pPayload[i];
 	}
+	if(is_string) POTATO[i] = '\0';
 }
 
 void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification)
@@ -188,22 +190,53 @@ void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification)
         break;
         */
     case POTATO_SSID_EVT:
-    	whynotwork(POTATO_Context.POTATO_SSID,pNotification);
+    	whynotwork(POTATO_Context.POTATO_SSID,pNotification,1);
     	//aci_gatt_write_charac_value(0xFFFE, attr_hdle, 30, POTATO_Context.POTATO_SSID);
     	//ret = Potato_Save(&POTATO_Context);
     	break;
     case POTATO_PW_EVT:
-    	whynotwork(POTATO_Context.POTATO_PW,pNotification);
+    	whynotwork(POTATO_Context.POTATO_PW,pNotification,1);
     	break;
     case POTATO_NAME_EVT:
-    	whynotwork(POTATO_Context.POTATO_NAME,pNotification);
+    	whynotwork(POTATO_Context.POTATO_NAME,pNotification,1);
     	break;
     case POTATO_IP_EVT:
-    	whynotwork(POTATO_Context.POTATO_IP,pNotification);
+    	whynotwork(POTATO_Context.POTATO_IP,pNotification,0);
     	break;
     case POTATO_OP_EVT:
-    	whynotwork(POTATO_Context.POTATO_OP,pNotification);
+    	whynotwork(POTATO_Context.POTATO_OP,pNotification,0);
     	break;
+    case POTATO_SAVE_EVT:
+    	switch(pNotification->DataTransfered.pPayload[0]) {
+
+    	case potato_save_opcode :
+    		ret = Potato_Save(&POTATO_Context);
+    		break;
+
+    	case potato_load_opcode :
+    		ret = Potato_Load(&POTATO_Context);
+    		break;
+
+    	case potato_backup_to_normal_opcode :
+    		ret = Potato_Backup_Load();
+			break;
+
+    	case potato_erase_normal_opcode :
+    		ret = Potato_Erase(normal);
+    		break;
+
+    	case potato_erase_both_opcode :
+    		ret = Potato_Erase(both);
+    		break;
+
+    	case potato_dummy_backup_opcode :
+    		ret = Potato_Dummy_Backup();
+    		break;
+
+    	}
+
+
+
 
 
       break;
@@ -211,7 +244,7 @@ void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification)
     default:
       break;
   }
-  ret = Potato_Save(&POTATO_Context);
+  //ret = Potato_Save(&POTATO_Context);
   return;
 }
 

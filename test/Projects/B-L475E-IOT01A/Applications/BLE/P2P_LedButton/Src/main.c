@@ -163,7 +163,7 @@ int main(void)
   /**
    * BLE application start
    */
-  Potato_Load(&POTATO_Context);
+  //Potato_Load(&POTATO_Context);
   LBR_Init(LBR_Full);
   
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
