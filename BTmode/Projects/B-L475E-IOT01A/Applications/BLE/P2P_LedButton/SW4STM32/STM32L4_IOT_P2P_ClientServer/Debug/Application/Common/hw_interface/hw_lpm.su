@@ -1,0 +1,3 @@
+hw_lpm.c:24:6:HW_SleepMode	0	static,ignoring_inline_asm
+hw_lpm.c:40:6:HW_StopMode	0	static,ignoring_inline_asm
+hw_lpm.c:58:6:HW_OffMode	0	static
