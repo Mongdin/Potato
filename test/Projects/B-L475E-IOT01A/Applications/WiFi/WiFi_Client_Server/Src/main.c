@@ -24,10 +24,10 @@
 #define TERMINAL_USE
 
 /* Update SSID and PASSWORD with own Access point settings */
-#define SSID     "potato2Gtest"
-#define PASSWORD "test"
-
-uint8_t RemoteIP[] = {192,168,3,110};
+#define SSID     "potato2G"
+#define PASSWORD "Rkawkxnlrla1"
+            
+uint8_t RemoteIP[] = {192,168,0,7};
 #define RemotePORT	8002
 
 #define WIFI_WRITE_TIMEOUT 10000
