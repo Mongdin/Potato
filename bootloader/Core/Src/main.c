@@ -20,7 +20,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -57,7 +56,7 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-#define APPLICATION_ADDRESS_BT (uint32_t) 0x0800A000
+#define APPLICATION_ADDRESS_BT (uint32_t) 0x08010000
 #define APPLICATION_ADDRESS_N (uint32_t) 0x08020000
 typedef void (*fptr)(void);
 /* USER CODE END 0 */

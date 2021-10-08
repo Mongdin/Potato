@@ -18,16 +18,21 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "save.h"
 
 /* Private defines -----------------------------------------------------------*/
 
 #define TERMINAL_USE
-
+POTATO_Context_t POTATO;
 /* Update SSID and PASSWORD with own Access point settings */
+/*
 #define SSID     "potato2G"
 #define PASSWORD "Rkawkxnlrla1"
-            
-uint8_t RemoteIP[] = {192,168,0,7};
+*/
+uint8_t *SSID;
+uint8_t *PASSWORD;
+
+uint8_t RemoteIP[] = {192,168,0,2};
 #define RemotePORT	8002
 
 #define WIFI_WRITE_TIMEOUT 10000
@@ -74,6 +79,7 @@ extern  SPI_HandleTypeDef hspi;
   */
 int main(void)
 {
+  SCB->VTOR = 0x08020000;
   uint8_t  MAC_Addr[6];
   uint8_t  IP_Addr[4];
   uint8_t TxData[] = "STM32 : Hello!\n";
@@ -105,6 +111,27 @@ int main(void)
 
   BSP_COM_Init(COM1, &hDiscoUart);
 #endif /* TERMINAL_USE */
+  Potato_Load(&POTATO);
+  TERMOUT("Load done\n");
+  /*
+  TERMOUT("%s\n",&POTATO.POTATO_SSID);
+  TERMOUT("%s\n",&POTATO.POTATO_PW);
+  TERMOUT("%s\n",&POTATO.POTATO_NAME);
+  TERMOUT("%s\n",&POTATO.POTATO_IP);
+  TERMOUT("%s\n",&POTATO.POTATO_OP);
+  TERMOUT("printing potato done\n");
+  */
+
+  //sprintf(SSID, "%s", &POTATO.POTATO_SSID);
+  //sprintf(PASSWORD, "%s", &POTATO.POTATO_PW);
+
+  for(uint8_t i = 0; i < 4; i++){
+	  RemoteIP[i] = POTATO.POTATO_IP[i];
+  }
+  //TERMOUT("copy done\n");
+  //TERMOUT("%s\n",SSID);
+  //TERMOUT("%s\n",PASSWORD);
+  //TERMOUT("%d.%d.%d.%d\n", RemoteIP[0], RemoteIP[1], RemoteIP[2], RemoteIP[3]);
 
   TERMOUT("****** WIFI Module in TCP Client mode demonstration123 ****** \n\n");
   TERMOUT("TCP Client Instructions :\n");
@@ -136,7 +163,7 @@ int main(void)
       BSP_LED_On(LED2);
     }
 
-    if( WIFI_Connect(SSID, PASSWORD, WIFI_ECN_WPA2_PSK) == WIFI_STATUS_OK)
+    if( WIFI_Connect(&POTATO.POTATO_SSID, &POTATO.POTATO_PW, WIFI_ECN_WPA2_PSK) == WIFI_STATUS_OK)
     {
       TERMOUT("> es-wifi module connected \n");
       if(WIFI_GetIP_Address(IP_Addr) == WIFI_STATUS_OK)
@@ -332,4 +359,13 @@ void SPI3_IRQHandler(void)
 {
   HAL_SPI_IRQHandler(&hspi);
 }
+/*
+void potato_get_string(){
+	//POTATO.POTATO_SSID
+	for(uint8_t i = 0; i < strlen(POTATO.POTATO_SSID); i++){
+
+	}
+	//POTATO.POTATO_PW
+}
+*/
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

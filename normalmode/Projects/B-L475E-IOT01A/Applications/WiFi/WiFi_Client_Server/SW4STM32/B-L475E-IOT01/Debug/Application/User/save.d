@@ -1,8 +1,4 @@
-Application/User/main.o: \
- D:/git/Potato/normalmode/Projects/B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Src/main.c \
- ../../../Inc/main.h ../../../../Common/Inc/wifi.h \
- ../../../../Common/Inc/es_wifi.h ../../../Inc/es_wifi_conf.h \
- ../../../../Common/Inc/es_wifi_io.h \
+Application/User/save.o: ../Application/User/save.c ../../../Inc/save.h \
  ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../../../Inc/stm32l4xx_hal_conf.h \
  ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -34,18 +30,10 @@ Application/User/main.o: \
  ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h \
  ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h \
- ../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.h \
- ../../../Inc/save.h
+ ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h \
+ ../../../Inc/crc.h
 
-../../../Inc/main.h:
-
-../../../../Common/Inc/wifi.h:
-
-../../../../Common/Inc/es_wifi.h:
-
-../../../Inc/es_wifi_conf.h:
-
-../../../../Common/Inc/es_wifi_io.h:
+../../../Inc/save.h:
 
 ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 
@@ -109,6 +97,6 @@ Application/User/main.o: \
 
 ../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h:
 
-../../../../../../../../Drivers/BSP/B-L475E-IOT01/stm32l475e_iot01.h:
+../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h:
 
-../../../Inc/save.h:
+../../../Inc/crc.h:

@@ -131,7 +131,7 @@
 /*!< Uncomment the following line if you need to relocate your vector Table in
      Internal SRAM. */
 /* #define VECT_TAB_SRAM */
-#define VECT_TAB_OFFSET  0x0000A000U /*!< Vector Table base offset field.
+#define VECT_TAB_OFFSET  0x00010000U /*!< Vector Table base offset field.
                                    This value must be a multiple of 0x200. */
 /******************************************************************************/
 /**
@@ -191,6 +191,14 @@ void SystemInit(void)
   #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
     SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
   #endif
+
+    //////////////////////////////////////////////////////////////
+    /* Reset the RCC clock configuration to the default reset state ------------*/
+    /* Set MSION bit */
+    RCC->CR |= RCC_CR_MSION;
+    /* Reset CFGR register */
+      RCC->CFGR = 0x00000000;
+    //////////////////////////////////////////////////////////////
 
     /**
      * The system start either from Power On with

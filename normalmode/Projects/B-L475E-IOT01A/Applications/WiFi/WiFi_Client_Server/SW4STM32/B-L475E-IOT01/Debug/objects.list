@@ -1,4 +1,6 @@
+"./Application/User/crc.o"
 "./Application/User/main.o"
+"./Application/User/save.o"
 "./Application/User/stm32l4xx_it.o"
 "./Application/WIFI/es_wifi.o"
 "./Application/WIFI/es_wifi_io.o"

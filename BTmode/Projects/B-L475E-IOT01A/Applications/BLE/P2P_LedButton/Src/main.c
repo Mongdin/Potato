@@ -47,6 +47,8 @@
  */
 static RTC_HandleTypeDef hrtc;  /**< RTC handler declaration */
 POTATO_Context_t POTATO_Context;
+
+UART_HandleTypeDef huart1;
 /**
  * END of Section APP_CONTEXT
  */
@@ -55,7 +57,7 @@ static void Init_RTC(void);
 static void SystemPower_Config(void);
 static void SystemLowPowerMode_Config(void);
 void SystemClock_Config(void);
-
+static void MX_USART1_UART_Init(void);
 
 
 /**
@@ -65,8 +67,12 @@ void SystemClock_Config(void);
  */
 int main(void)
 {
+  SCB->VTOR = 0x08010000;
+  HAL_UART_Transmit(&huart1, "done\n", 5, 10);
+  HAL_DeInit();
   HAL_Init();
-
+  MX_USART1_UART_Init();
+  HAL_UART_Transmit(&huart1, "done\n", 5, 10);
 #if (CFG_DEBUGGER_SUPPORTED == 1)
   /**
    * Keep debugger enabled while in any low power mode
@@ -80,6 +86,7 @@ int main(void)
   /**
    * The PWR Peripheral is used in most of the drivers. It should be kept enable to make sure all accesses are granted.
    */
+  //HAL_UART_Transmit(&huart1, "done\n", 5, 10);
   __HAL_RCC_PWR_CLK_ENABLE();
 
   /**
@@ -168,7 +175,7 @@ int main(void)
   
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
   BSP_LED_Init(LED2);
-  
+
 
   /* Start the main processes */
   while(1)
@@ -335,6 +342,7 @@ static void SystemLowPowerMode_Config(void)
  * @param  None
  * @retval None
  */
+
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -616,6 +624,37 @@ void HW_TS_RTC_Int_AppNot(uint32_t eTimerProcessID, uint8_t ubTimerID, HW_TS_pTi
       pfTimerCallBack();
       break;
   }
+}
+
+/**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
 }
 
 
