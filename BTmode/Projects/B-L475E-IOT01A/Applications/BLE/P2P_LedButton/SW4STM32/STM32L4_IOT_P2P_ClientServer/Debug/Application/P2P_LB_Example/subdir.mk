@@ -5,32 +5,38 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Application/P2P_LB_Example/adc.c \
 ../Application/P2P_LB_Example/crc.c \
 D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/P2P_LedButton/Src/lb_client_app.c \
 D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/P2P_LedButton/Src/lb_demo.c \
 D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/P2P_LedButton/Src/lb_server_app.c \
 D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/P2P_LedButton/Src/main.c \
 ../Application/P2P_LB_Example/save.c \
+../Application/P2P_LB_Example/stm32l4xx_hal_rcc_ex.c \
 D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/P2P_LedButton/Src/stm32l4xx_it.c \
 D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/P2P_LedButton/Src/system_stm32l4xx.c 
 
 OBJS += \
+./Application/P2P_LB_Example/adc.o \
 ./Application/P2P_LB_Example/crc.o \
 ./Application/P2P_LB_Example/lb_client_app.o \
 ./Application/P2P_LB_Example/lb_demo.o \
 ./Application/P2P_LB_Example/lb_server_app.o \
 ./Application/P2P_LB_Example/main.o \
 ./Application/P2P_LB_Example/save.o \
+./Application/P2P_LB_Example/stm32l4xx_hal_rcc_ex.o \
 ./Application/P2P_LB_Example/stm32l4xx_it.o \
 ./Application/P2P_LB_Example/system_stm32l4xx.o 
 
 C_DEPS += \
+./Application/P2P_LB_Example/adc.d \
 ./Application/P2P_LB_Example/crc.d \
 ./Application/P2P_LB_Example/lb_client_app.d \
 ./Application/P2P_LB_Example/lb_demo.d \
 ./Application/P2P_LB_Example/lb_server_app.d \
 ./Application/P2P_LB_Example/main.d \
 ./Application/P2P_LB_Example/save.d \
+./Application/P2P_LB_Example/stm32l4xx_hal_rcc_ex.d \
 ./Application/P2P_LB_Example/stm32l4xx_it.d \
 ./Application/P2P_LB_Example/system_stm32l4xx.d 
 

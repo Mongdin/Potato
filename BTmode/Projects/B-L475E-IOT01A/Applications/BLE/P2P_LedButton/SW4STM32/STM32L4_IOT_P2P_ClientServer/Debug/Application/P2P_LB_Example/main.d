@@ -23,6 +23,9 @@ Application/P2P_LB_Example/main.o: \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_gpio.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_dma.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_cortex.h \
+ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc.h \
+ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_adc.h \
+ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc_ex.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash_ex.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash_ramfunc.h \
@@ -54,7 +57,8 @@ Application/P2P_LB_Example/main.o: \
  ../../../../Common/tl/tl_types.h ../../../../Common/tl/tl_ble_hci.h \
  ../../../../Common/tl/tl_ble_io.h ../../../Inc/lb_server_app.h \
  d:\git\potato\btmode\drivers\bsp\b-l475e-iot01\stm32l475e_iot01.h \
- ../../../Inc/save.h
+ ../../../Inc/save.h ../../../Inc/adc.h \
+ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_rcc_ex.h
 
 ../../../../Common/common.h:
 
@@ -103,6 +107,12 @@ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_gpio.h:
 d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_dma.h:
 
 d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_cortex.h:
+
+d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc.h:
+
+d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_adc.h:
+
+d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc_ex.h:
 
 d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash.h:
 
@@ -173,3 +183,7 @@ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_dma.h:
 d:\git\potato\btmode\drivers\bsp\b-l475e-iot01\stm32l475e_iot01.h:
 
 ../../../Inc/save.h:
+
+../../../Inc/adc.h:
+
+d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_rcc_ex.h:

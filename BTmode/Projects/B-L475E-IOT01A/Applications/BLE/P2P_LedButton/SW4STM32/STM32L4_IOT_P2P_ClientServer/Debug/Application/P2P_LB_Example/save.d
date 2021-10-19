@@ -21,6 +21,9 @@ Application/P2P_LB_Example/save.o: ../Application/P2P_LB_Example/save.c \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_gpio.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_dma.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_cortex.h \
+ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc.h \
+ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_adc.h \
+ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc_ex.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash_ex.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash_ramfunc.h \
@@ -82,6 +85,12 @@ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_gpio.h:
 d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_dma.h:
 
 d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_cortex.h:
+
+d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc.h:
+
+d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_adc.h:
+
+d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc_ex.h:
 
 d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash.h:
 

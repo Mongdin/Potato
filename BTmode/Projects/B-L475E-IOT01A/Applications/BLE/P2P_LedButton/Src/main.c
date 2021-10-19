@@ -31,6 +31,8 @@
 #include "lb_server_app.h"
 #include "stm32l475e_iot01.h"
 #include "save.h"
+#include "adc.h"
+#include "stm32l4xx_hal_rcc_ex.h"
 //sadgafdsvgilhaqjfgklasdgafswdghfsZGsg
 
 /**
@@ -49,6 +51,7 @@ static RTC_HandleTypeDef hrtc;  /**< RTC handler declaration */
 POTATO_Context_t POTATO_Context;
 
 UART_HandleTypeDef huart1;
+ADC_HandleTypeDef hadc1;
 /**
  * END of Section APP_CONTEXT
  */
@@ -60,6 +63,8 @@ void SystemClock_Config(void);
 static void MX_USART1_UART_Init(void);
 
 
+void MX_ADC1_Init(void);
+void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc);
 /**
  * @brief  Main program
  * @param  None
@@ -68,11 +73,11 @@ static void MX_USART1_UART_Init(void);
 int main(void)
 {
   SCB->VTOR = 0x08010000;
-  HAL_UART_Transmit(&huart1, "done\n", 5, 10);
+
   HAL_DeInit();
   HAL_Init();
   MX_USART1_UART_Init();
-  HAL_UART_Transmit(&huart1, "done\n", 5, 10);
+
 #if (CFG_DEBUGGER_SUPPORTED == 1)
   /**
    * Keep debugger enabled while in any low power mode
@@ -175,6 +180,7 @@ int main(void)
   
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
   BSP_LED_Init(LED2);
+  //MX_ADC1_Init();
 
 
   /* Start the main processes */
@@ -285,6 +291,7 @@ static void SystemPower_Config(void)
    */
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /**
    * Configure all GPIO port pins in Analog mode with no pull
@@ -656,7 +663,124 @@ static void MX_USART1_UART_Init(void)
   /* USER CODE END USART1_Init 2 */
 
 }
+void MX_ADC1_Init(void)
+{
 
+  /* USER CODE BEGIN ADC1_Init 0 */
+
+  /* USER CODE END ADC1_Init 0 */
+
+  ADC_MultiModeTypeDef multimode = {0};
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC1_Init 1 */
+
+  /* USER CODE END ADC1_Init 1 */
+  /** Common config
+  */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
+  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  hadc1.Init.LowPowerAutoWait = DISABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.DMAContinuousRequests = DISABLE;
+  hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
+  hadc1.Init.OversamplingMode = DISABLE;
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+	  //Error_Handler();
+	  ;
+  }
+  /** Configure the ADC multi-mode
+  */
+  multimode.Mode = ADC_MODE_INDEPENDENT;
+  if (HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode) != HAL_OK)
+  {
+    //Error_Handler();
+	  ;
+  }
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_1;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_2CYCLES_5;
+  sConfig.SingleDiff = ADC_SINGLE_ENDED;
+  sConfig.OffsetNumber = ADC_OFFSET_NONE;
+  sConfig.Offset = 0;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+	  //Error_Handler();
+	  	  ;
+  }
+  /* USER CODE BEGIN ADC1_Init 2 */
+
+  /* USER CODE END ADC1_Init 2 */
+
+}
+
+void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  if(hadc->Instance==ADC1)
+  {
+  /* USER CODE BEGIN ADC1_MspInit 0 */
+
+  /* USER CODE END ADC1_MspInit 0 */
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
+    PeriphClkInit.AdcClockSelection = RCC_ADCCLKSOURCE_SYSCLK;
+    /*
+    PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_NONE;
+    PeriphClkInit.PLLSAI1.PLLSAI1M = 1;
+    PeriphClkInit.PLLSAI1.PLLSAI1N = 24;
+    PeriphClkInit.PLLSAI1.PLLSAI1P = RCC_PLLP_DIV7;
+    PeriphClkInit.PLLSAI1.PLLSAI1Q = RCC_PLLQ_DIV2;
+    PeriphClkInit.PLLSAI1.PLLSAI1R = RCC_PLLR_DIV2;
+    PeriphClkInit.PLLSAI1.PLLSAI1ClockOut = RCC_PLLSAI1_ADC1CLK;
+    */
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+      //Error_Handler();
+    	;
+    }
+
+    /* Peripheral clock enable */
+    __HAL_RCC_ADC_CLK_ENABLE();
+
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+
+    /**ADC1 GPIO Configuration
+    PC0     ------> ADC1_IN1
+    PC1     ------> ADC1_IN2
+    PC2     ------> ADC1_IN3
+    PC3     ------> ADC1_IN4
+    PA4     ------> ADC1_IN9
+    PC4     ------> ADC1_IN13
+    PC5     ------> ADC1_IN14
+    PB1     ------> ADC1_IN16
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_0;
+    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG_ADC_CONTROL;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+    /* ADC1 interrupt Init */
+    //HAL_NVIC_SetPriority(ADC1_2_IRQn, 0, 0);
+    //HAL_NVIC_EnableIRQ(ADC1_2_IRQn);
+  /* USER CODE BEGIN ADC1_MspInit 1 */
+
+  /* USER CODE END ADC1_MspInit 1 */
+  }
+}
 
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

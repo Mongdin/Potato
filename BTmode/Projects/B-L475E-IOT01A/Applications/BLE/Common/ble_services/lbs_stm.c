@@ -26,6 +26,8 @@
 #include "svc_ctl.h"
 
 #include "lbs_stm.h"
+#include "adc.h"
+#include "string.h"
 
 /* Private typedef -----------------------------------------------------------*/
 typedef struct{
@@ -43,6 +45,7 @@ typedef struct{
   uint16_t  testing_IP_Hdle;
   uint16_t  testing_OP_Hdle;				  /**< Characteristic handle */
   uint16_t  testing_Save_Hdle;
+  uint16_t  testing_Adc_Hdle;
 
 }testingtestContext_t;
 
@@ -56,6 +59,8 @@ typedef struct{
  */
 static LedButtonContext_t aLedButtonContext;
 static testingtestContext_t testingtestContext;
+uint8_t adc_buffer[5] = {0,};
+long adc_val = 0;
 /**
  * END of Section BLE_BLUENRG_DRIVER_CONTEXT
  */
@@ -82,6 +87,7 @@ static SVCCTL_EvtAckStatus_t LedButton_Event_Handler(void *Event)
   evt_gatt_attr_modified    * attribute_modified;
   LBS_App_Notification_evt_t Notification;
   /////////////////////////////////////////
+  adc_val = 0;
 
   ////////////////////////////////
   return_value = SVCCTL_EvtNotAck;
@@ -194,6 +200,24 @@ static SVCCTL_EvtAckStatus_t LedButton_Event_Handler(void *Event)
                           Notification.DataTransfered.pPayload=attribute_modified->att_data;
                           LBS_App_Notification(&Notification);
                         }
+
+            if(attribute_modified->attr_handle == (testingtestContext.testing_Adc_Hdle + 1))
+                        {
+                          //value handle
+            			  /*
+                          APPL_MESG_DBG("-- GATT : RECEIVED\n");
+                          Notification.LBS_Evt_Opcode = POTATO_SAVE_EVT;
+                          Notification.DataTransfered.Length=attribute_modified->data_length;
+                          Notification.DataTransfered.pPayload=attribute_modified->att_data;
+                          LBS_App_Notification(&Notification);
+                          */
+
+            			  adc_val = Potato_Readadc();
+            			  sprintf(adc_buffer,"%ld",adc_val);
+            			  aci_gatt_update_char_value(testingtestContext.testing_Svc_Hdle, testingtestContext.testing_Adc_Hdle, 0, strlen(adc_buffer), adc_buffer);
+
+
+                        }
             ////////////////////////////////////////////////////////////////////////////////////testing_Save_Hdle
 
           
@@ -247,7 +271,7 @@ void LBS_STM_Init(void)
       aci_gatt_add_serv(UUID_TYPE_16,
                         (const uint8_t *) &uuid,
                         PRIMARY_SERVICE,
-                        14,
+                        20,
                         &(testingtestContext.testing_Svc_Hdle));
 
       uuid = testingtest_SSID_UUID;
@@ -320,6 +344,18 @@ void LBS_STM_Init(void)
                                   10, /* encryKeySize */
                                   1, /* isVariable */
                                   &(testingtestContext.testing_Save_Hdle));
+
+      uuid = testinttest_Adc_UUID;
+      aci_gatt_add_char(testingtestContext.testing_Svc_Hdle,
+                                  UUID_TYPE_16,
+                                  (const uint8_t *) &uuid ,
+                                  5,
+								  CHAR_PROP_NOTIFY|CHAR_PROP_WRITE_WITHOUT_RESP,
+								  ATTR_PERMISSION_NONE,
+								  GATT_NOTIFY_ATTRIBUTE_WRITE, /* gattEvtMask */
+                                  10, /* encryKeySize */
+                                  1, /* isVariable */
+                                  &(testingtestContext.testing_Adc_Hdle));
 
       //aci_gatt_write_charac_value(conn_handle, attr_handle, value_len, attr_value)
 

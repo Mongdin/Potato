@@ -32,6 +32,7 @@
 
 #include "save.h"
 
+
 extern POTATO_Context_t POTATO_Context;
 
 
@@ -232,6 +233,7 @@ void LBS_App_Notification(LBS_App_Notification_evt_t *pNotification)
     	case potato_dummy_backup_opcode :
     		ret = Potato_Dummy_Backup();
     		break;
+
 
     	}
 

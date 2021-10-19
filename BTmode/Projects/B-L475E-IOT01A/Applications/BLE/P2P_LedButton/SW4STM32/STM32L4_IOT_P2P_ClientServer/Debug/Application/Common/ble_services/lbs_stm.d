@@ -23,6 +23,9 @@ Application/Common/ble_services/lbs_stm.o: \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_gpio.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_dma.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_cortex.h \
+ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc.h \
+ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_adc.h \
+ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc_ex.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash_ex.h \
  d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash_ramfunc.h \
@@ -60,7 +63,9 @@ Application/Common/ble_services/lbs_stm.o: \
  ../../../../Common/ble_core/bluenrg_l2cap_aci.h \
  ../../../../Common/ble_core/hci_le.h ../../../../Common/debug/debug.h \
  D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/Common/ble_services/svc_ctl.h \
- D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/Common/ble_services/lbs_stm.h
+ D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/Common/ble_services/lbs_stm.h \
+ ../../../Inc/adc.h \
+ d:\git\potato\btmode\drivers\bsp\b-l475e-iot01\stm32l475e_iot01.h
 
 ../../../../Common/common.h:
 
@@ -109,6 +114,12 @@ d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_gpio.h:
 d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_dma.h:
 
 d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_cortex.h:
+
+d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc.h:
+
+d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_ll_adc.h:
+
+d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_adc_ex.h:
 
 d:\git\potato\btmode\drivers\stm32l4xx_hal_driver\inc\stm32l4xx_hal_flash.h:
 
@@ -189,3 +200,7 @@ D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/Common/ble_service
 D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/Common/ble_services/svc_ctl.h:
 
 D:/git/Potato/BTmode/Projects/B-L475E-IOT01A/Applications/BLE/Common/ble_services/lbs_stm.h:
+
+../../../Inc/adc.h:
+
+d:\git\potato\btmode\drivers\bsp\b-l475e-iot01\stm32l475e_iot01.h:

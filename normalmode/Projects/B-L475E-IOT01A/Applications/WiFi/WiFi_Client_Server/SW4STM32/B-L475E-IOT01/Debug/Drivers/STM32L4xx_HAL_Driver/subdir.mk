@@ -6,6 +6,8 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 D:/git/Potato/normalmode/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c \
+../Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_adc.c \
+../Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_adc_ex.c \
 D:/git/Potato/normalmode/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c \
 D:/git/Potato/normalmode/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c \
 D:/git/Potato/normalmode/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c \
@@ -24,6 +26,8 @@ D:/git/Potato/normalmode/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.
 
 OBJS += \
 ./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal.o \
+./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_adc.o \
+./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_adc_ex.o \
 ./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_cortex.o \
 ./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_dma.o \
 ./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_flash.o \
@@ -42,6 +46,8 @@ OBJS += \
 
 C_DEPS += \
 ./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal.d \
+./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_adc.d \
+./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_adc_ex.d \
 ./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_cortex.d \
 ./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_dma.d \
 ./Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_flash.d \
@@ -61,6 +67,8 @@ C_DEPS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal.o: D:/git/Potato/normalmode/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c Drivers/STM32L4xx_HAL_Driver/subdir.mk
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32L475xx -DUSE_STM32L475_DISCOVERY -c -I../../../Inc -I../../../../Common/Inc -I../../../../../../../../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc -I../../../../../../../../Drivers/BSP/B-L475E-IOT01 -I../../../../../../../../Drivers/CMSIS/Include -Os -ffunction-sections -Wall -Wno-strict-aliasing -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+Drivers/STM32L4xx_HAL_Driver/%.o: ../Drivers/STM32L4xx_HAL_Driver/%.c Drivers/STM32L4xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32L475xx -DUSE_STM32L475_DISCOVERY -c -I../../../Inc -I../../../../Common/Inc -I../../../../../../../../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc -I../../../../../../../../Drivers/BSP/B-L475E-IOT01 -I../../../../../../../../Drivers/CMSIS/Include -Os -ffunction-sections -Wall -Wno-strict-aliasing -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Drivers/STM32L4xx_HAL_Driver/stm32l4xx_hal_cortex.o: D:/git/Potato/normalmode/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c Drivers/STM32L4xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32L475xx -DUSE_STM32L475_DISCOVERY -c -I../../../Inc -I../../../../Common/Inc -I../../../../../../../../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../../../../../../../../Drivers/STM32L4xx_HAL_Driver/Inc -I../../../../../../../../Drivers/BSP/B-L475E-IOT01 -I../../../../../../../../Drivers/CMSIS/Include -Os -ffunction-sections -Wall -Wno-strict-aliasing -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
