@@ -809,8 +809,9 @@ void HW_BNRG_Close(void)
 
 void HW_BNRG_Init(HW_BNRG_InitMode_t InitMode)
 {
+  __disable_irq();
   SPI_Init(&SpiHandle);
-
+  __enable_irq();
   LL_SPI_EnableDMAReq_TX(BNRG_SPI_INSTANCE);
   LL_SPI_EnableDMAReq_RX(BNRG_SPI_INSTANCE);
 

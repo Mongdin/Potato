@@ -65,6 +65,7 @@ static void MX_USART1_UART_Init(void);
 
 void MX_ADC1_Init(void);
 void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc);
+
 /**
  * @brief  Main program
  * @param  None
@@ -73,6 +74,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc);
 int main(void)
 {
   SCB->VTOR = 0x08010000;
+
 
   HAL_DeInit();
   HAL_Init();
@@ -176,11 +178,15 @@ int main(void)
    * BLE application start
    */
   //Potato_Load(&POTATO_Context);
+
+
   LBR_Init(LBR_Full);
   
+
+
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
   BSP_LED_Init(LED2);
-  //MX_ADC1_Init();
+  MX_ADC1_Init();
 
 
   /* Start the main processes */

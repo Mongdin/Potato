@@ -1,0 +1,15 @@
+b_l475e_iot01a1.c:80:9:BSP_GetVersion	4	static
+b_l475e_iot01a1.c:92:9:BSP_LED_Init	16	static
+b_l475e_iot01a1.c:107:9:BSP_LED_DeInit	40	static
+b_l475e_iot01a1.c:130:9:BSP_LED_On	16	static
+b_l475e_iot01a1.c:147:9:BSP_LED_Off	16	static
+b_l475e_iot01a1.c:164:9:BSP_LED_Toggle	16	static
+b_l475e_iot01a1.c:181:9:BSP_LED_GetState	16	static
+b_l475e_iot01a1.c:189:13:LED_USER_GPIO_Init	40	static
+b_l475e_iot01a1.c:223:9:BSP_PB_Init	24	static
+b_l475e_iot01a1.c:263:9:BSP_PB_DeInit	40	static
+b_l475e_iot01a1.c:281:9:BSP_PB_GetState	16	static
+b_l475e_iot01a1.c:290:6:BSP_PB_IRQHandler	16	static
+b_l475e_iot01a1.c:300:13:BSP_PB_Callback	16	static
+b_l475e_iot01a1.c:313:13:BUTTON_USER_EXTI_Callback	8	static
+b_l475e_iot01a1.c:322:13:BUTTON_USER_GPIO_Init	40	static
