@@ -32,6 +32,7 @@
 #include "bluenrg_gap_aci.h"
 #include "bluenrg_gatt_aci.h"
 #include "bluenrg_hal_aci.h"
+#include "bluenrg_gap.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -200,7 +201,6 @@ void MX_BlueNRG_MS_Process(void)
 	tBleStatus ret;
 
 	ret = aci_gap_set_discoverable(ADV_IND, 0, 0, PUBLIC_ADDR, NO_WHITE_LIST_USE, sizeof(local_name), local_name, 0, NULL, 0, 0);
-
 
 	hci_user_evt_proc();
 

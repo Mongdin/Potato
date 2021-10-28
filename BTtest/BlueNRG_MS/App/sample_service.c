@@ -277,6 +277,7 @@ void enableNotification(void)
  */
 void Attribute_Modified_CB(uint16_t handle, uint8_t data_length, uint8_t *att_data)
 {
+	printf("Attribute_Modified_CB\n");
   if(handle == RXCharHandle + 1){
     receiveData(att_data, data_length);
   } else if (handle == TXCharHandle + 2) {
@@ -380,8 +381,18 @@ void user_notify(void * pData)
       evt_blue_aci *blue_evt = (void*)event_pckt->data;
       switch(blue_evt->ecode){
 
+
+      case EVT_BLUE_GATT_READ_PERMIT_REQ:
+      {
+    	  evt_gatt_read_permit_req *evt = (void *) blue_evt->data;
+    	  Read_Request_CB(evt->attr_handle);
+      }
+      break;
+
+
       case EVT_BLUE_GATT_ATTRIBUTE_MODIFIED:
         {
+        	printf("EVT_BLUE_GATT_ATTRIBUTE_MODIFIED\n");
           if (bnrg_expansion_board == IDB05A1) {
             evt_gatt_attr_modified_IDB05A1 *evt = (evt_gatt_attr_modified_IDB05A1*)blue_evt->data;
             Attribute_Modified_CB(evt->attr_handle, evt->data_length, evt->att_data);

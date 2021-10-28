@@ -348,6 +348,7 @@ void hci_user_evt_proc(void)
 
 int32_t hci_notify_asynch_evt(void* pdata)
 {
+
   tHciDataPacket * hciReadPacket = NULL;
   uint8_t data_len;
   

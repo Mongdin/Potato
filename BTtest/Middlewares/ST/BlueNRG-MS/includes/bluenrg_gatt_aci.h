@@ -17,7 +17,7 @@
 #define __BLUENRG_GATT_ACI_H__
 
 #include "bluenrg_gatt_server.h"
-
+void Read_Request_CB(uint16_t handle);
 /** 
  * @addtogroup HIGH_LEVEL_INTERFACE HIGH_LEVEL_INTERFACE
  * @{

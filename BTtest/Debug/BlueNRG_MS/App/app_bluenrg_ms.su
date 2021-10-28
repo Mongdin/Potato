@@ -1,5 +1,5 @@
-app_bluenrg_ms.c:110:6:MX_BlueNRG_MS_Init	88	static
-app_bluenrg_ms.c:196:6:MX_BlueNRG_MS_Process	48	static
+app_bluenrg_ms.c:111:6:MX_BlueNRG_MS_Init	88	static
+app_bluenrg_ms.c:197:6:MX_BlueNRG_MS_Process	48	static
 app_bluenrg_ms.c:247:13:User_Process	40	static
 app_bluenrg_ms.c:309:6:BSP_PB_Callback	16	static
 app_bluenrg_ms.c:315:6:POTATO_Test_CB	16	static
