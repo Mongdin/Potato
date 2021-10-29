@@ -68,6 +68,8 @@ extern volatile uint8_t notification_enabled;
 extern volatile uint8_t end_read_tx_char_handle;
 extern volatile uint8_t end_read_rx_char_handle;
 
+volatile uint8_t SPIwasLocked = 0;
+
 /* USER CODE BEGIN PV */
 
 typedef struct{
@@ -201,6 +203,13 @@ void MX_BlueNRG_MS_Process(void)
 	tBleStatus ret;
 
 	ret = aci_gap_set_discoverable(ADV_IND, 0, 0, PUBLIC_ADDR, NO_WHITE_LIST_USE, sizeof(local_name), local_name, 0, NULL, 0, 0);
+
+
+	if (SPIwasLocked == 1)
+	{
+		SPIwasLocked = 0;
+		hci_tl_lowlevel_isr();
+	}
 
 	hci_user_evt_proc();
 

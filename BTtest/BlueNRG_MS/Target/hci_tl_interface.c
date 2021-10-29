@@ -280,6 +280,11 @@ void hci_tl_lowlevel_init(void)
   */
 void hci_tl_lowlevel_isr(void)
 {
+	extern volatile uint8_t SPIwasLocked;
+	if (hspi3.Lock == HAL_LOCKED){
+	             SPIwasLocked = 1;
+	             return;
+	      }
   /* Call hci_notify_asynch_evt() */
   while(IsDataAvailable())
   {
@@ -293,5 +298,6 @@ void hci_tl_lowlevel_isr(void)
 
   /* USER CODE END hci_tl_lowlevel_isr */
 }
+
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
