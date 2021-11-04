@@ -83,7 +83,17 @@
 *        discovered, but it is fixed only for this demo.
 */
 //#define RX_HANDLE   0x0014
+ typedef struct{
+   uint16_t  POTATO_Svc_Hdle;              /**< Service handle */
+   uint16_t  POTATO_SSID_Hdle;             /**< Characteristic handle */
+   uint16_t  POTATO_PW_Hdle;
+   uint16_t  POTATO_NAME_Hdle;
+   uint16_t  POTATO_IP_Hdle;
+   uint16_t  POTATO_OP_Hdle;
+   uint16_t  POTATO_Save_Hdle;
+   uint16_t  POTATO_Adc_Hdle;
 
+ }POTATO_Context_t;
 /**
  * @}
  */
@@ -100,6 +110,7 @@ void startReadRXCharHandle(void);
 void enableNotification(void);
 void Attribute_Modified_CB(uint16_t handle, uint8_t data_length,
                            uint8_t *att_data);
+void Read_Request_CB(uint16_t handle);
 void GAP_ConnectionComplete_CB(uint8_t addr[6], uint16_t handle);
 void GAP_DisconnectionComplete_CB(void);
 void GATT_Notification_CB(uint16_t attr_handle, uint8_t attr_len,

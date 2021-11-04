@@ -1,0 +1,4 @@
+crc.c:57:1:reflect	24	static
+crc.c:95:1:crcSlow	32	static
+crc.c:156:1:crcInit	24	static
+crc.c:212:1:crcFast	32	static

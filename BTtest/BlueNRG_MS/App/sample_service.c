@@ -41,6 +41,9 @@
 #include "bluenrg_hal_aci.h"
 
 #include "b_l475e_iot01a1.h"
+#include "save.h"
+#include "adc.h"
+#include <string.h>
 
 /** @addtogroup Applications
  *  @{
@@ -72,6 +75,9 @@ uint16_t rx_handle;
 
 uint16_t sampleServHandle, TXCharHandle, RXCharHandle;
 
+POTATO_Save_t POTATO_Save;
+POTATO_Context_t POTATO_Context;
+
 extern uint8_t bnrg_expansion_board;
 extern BLE_RoleTypeDef BLE_Role;
 /**
@@ -101,6 +107,8 @@ extern BLE_RoleTypeDef BLE_Role;
  * @param  None
  * @retval Status
  */
+
+
 tBleStatus Add_Sample_Service(void)
 {
   tBleStatus ret;
@@ -111,28 +119,50 @@ tBleStatus Add_Sample_Service(void)
   D973F2E1-B19E-11E2-9E96-0800200C9A66
   D973F2E2-B19E-11E2-9E96-0800200C9A66
   */
+    uint8_t POTATO_UUID[] = {0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x99,0xAA,0xBB,0xCC,0xDD,0xEE,0xFF,0x00};
 
-  const uint8_t service_uuid[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe0,0xf2,0x73,0xd9};
-  const uint8_t charUuidTX[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe1,0xf2,0x73,0xd9};
-  const uint8_t charUuidRX[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe2,0xf2,0x73,0xd9};
+    aci_gatt_add_serv(UUID_TYPE_128, POTATO_UUID, PRIMARY_SERVICE, 40, &(POTATO_Context.POTATO_Svc_Hdle));
 
-  ret = aci_gatt_add_serv(UUID_TYPE_128, service_uuid, PRIMARY_SERVICE, 7, &sampleServHandle); /* original is 9?? */
-  if (ret != BLE_STATUS_SUCCESS) goto fail;
+  	POTATO_UUID[15] = 0x01;
+  	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 31,
+  					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
+  					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_SSID_Hdle));
 
-  ret =  aci_gatt_add_char(sampleServHandle, UUID_TYPE_128, charUuidTX, 20, CHAR_PROP_NOTIFY, ATTR_PERMISSION_NONE, 0,
-                           16, 1, &TXCharHandle);
-  if (ret != BLE_STATUS_SUCCESS) goto fail;
+  	POTATO_UUID[15] = 0x02;
+  	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 31,
+  					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
+  					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_PW_Hdle));
 
-  ret =  aci_gatt_add_char(sampleServHandle, UUID_TYPE_128, charUuidRX, 20, CHAR_PROP_WRITE|CHAR_PROP_WRITE_WITHOUT_RESP, ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE,
-                           16, 1, &RXCharHandle);
-  if (ret != BLE_STATUS_SUCCESS) goto fail;
+  	POTATO_UUID[15] = 0x03;
+  	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 31,
+  					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
+  					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_NAME_Hdle));
 
-  PRINTF("Sample Service added.\nTX Char Handle %04X, RX Char Handle %04X\n", TXCharHandle, RXCharHandle);
-  return BLE_STATUS_SUCCESS;
+  	POTATO_UUID[15] = 0x04;
+  	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 4,
+  					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
+  					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_IP_Hdle));
 
-fail:
-  PRINTF("Error while adding Sample Service.\n");
-  return BLE_STATUS_ERROR ;
+  	POTATO_UUID[15] = 0x05;
+  	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 3,
+  					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
+  					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_OP_Hdle));
+
+  	POTATO_UUID[15] = 0x06;
+  	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 1,
+  					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
+  					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_Save_Hdle));
+
+  	POTATO_UUID[15] = 0x07;
+  	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 5,
+  					  CHAR_PROP_READ,
+  					  ATTR_PERMISSION_NONE, GATT_NOTIFY_READ_REQ_AND_WAIT_FOR_APPL_RESP, 10, 1, &(POTATO_Context.POTATO_Adc_Hdle));
+
+    printf("Sample Service added.\nTX Char Handle %04X, RX Char Handle %04X\n", TXCharHandle, RXCharHandle);
+
+
+    printf("Potato Load ret : %d\n",Potato_Load(&POTATO_Save));
+    return BLE_STATUS_SUCCESS;
 }
 
 /**
@@ -170,7 +200,7 @@ void Make_Connection(void)
     /* disable scan response */
     hci_le_set_scan_resp_data(0,NULL);
 
-    PRINTF("General Discoverable Mode ");
+    printf("General Discoverable Mode ");
     /*
     Advertising_Event_Type, Adv_Interval_Min, Adv_Interval_Max, Address_Type, Adv_Filter_Policy,
     Local_Name_Length, Local_Name, Service_Uuid_Length, Service_Uuid_List, Slave_Conn_Interval_Min,
@@ -178,7 +208,7 @@ void Make_Connection(void)
     */
     ret = aci_gap_set_discoverable(ADV_DATA_TYPE, ADV_INTERV_MIN, ADV_INTERV_MAX, PUBLIC_ADDR,
                                    NO_WHITE_LIST_USE, 13, local_name, 0, NULL, 0, 0);
-    PRINTF("%d\n",ret);
+    printf("%d\n",ret);
   }
 }
 
@@ -191,7 +221,7 @@ void startReadTXCharHandle(void)
 {
   if (!start_read_tx_char_handle)
   {
-    PRINTF("Start reading TX Char Handle\n");
+    printf("Start reading TX Char Handle\n");
 
     const uint8_t charUuid128_TX[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe1,0xf2,0x73,0xd9};
     aci_gatt_disc_charac_by_uuid(connection_handle, 0x0001, 0xFFFF, UUID_TYPE_128, charUuid128_TX);
@@ -208,7 +238,7 @@ void startReadRXCharHandle(void)
 {
   if (!start_read_rx_char_handle)
   {
-    PRINTF("Start reading RX Char Handle\n");
+    printf("Start reading RX Char Handle\n");
 
     const uint8_t charUuid128_RX[16] = {0x66,0x9a,0x0c,0x20,0x00,0x08,0x96,0x9e,0xe2,0x11,0x9e,0xb1,0xe2,0xf2,0x73,0xd9};
     aci_gatt_disc_charac_by_uuid(connection_handle, 0x0001, 0xFFFF, UUID_TYPE_128, charUuid128_RX);
@@ -268,6 +298,19 @@ void enableNotification(void)
   notification_enabled = TRUE;
 }
 
+
+void whynotwork(uint8_t *POTATO, uint8_t data_length, uint8_t *att_data, uint8_t is_string)
+{
+	uint8_t i = 0;
+	for(; i < data_length; i++)
+	{
+		POTATO[i] = att_data[i];
+	}
+	if(is_string){
+		POTATO[i] = '\0';
+	}
+}
+
 /**
  * @brief  This function is called when an attribute gets modified
  * @param  handle : handle of the attribute
@@ -278,13 +321,106 @@ void enableNotification(void)
 void Attribute_Modified_CB(uint16_t handle, uint8_t data_length, uint8_t *att_data)
 {
 	//printf("Attribute_Modified_CB\n");
+	/*
   if(handle == RXCharHandle + 1){
     receiveData(att_data, data_length);
   } else if (handle == TXCharHandle + 2) {
     if(att_data[0] == 0x01)
       notification_enabled = TRUE;
   }
+  */
+	uint8_t ret = 0;
+
+	if(handle == (POTATO_Context.POTATO_SSID_Hdle)+1)
+	{
+		printf("1\n");
+		//memcpy(&(POTATO_Save.POTATO_SSID),att_data,strlen(att_data));
+		whynotwork(POTATO_Save.POTATO_SSID, data_length, att_data, 1);
+	}
+
+	else if(handle == (POTATO_Context.POTATO_PW_Hdle)+1)
+	{
+		printf("2\n");
+		//memcpy(&(POTATO_Save.POTATO_PW),att_data,strlen(att_data));
+		whynotwork(POTATO_Save.POTATO_PW, data_length, att_data, 1);
+	}
+	else if(handle == (POTATO_Context.POTATO_NAME_Hdle)+1)
+	{
+		printf("3\n");
+		//memcpy(&(POTATO_Save.POTATO_NAME),att_data,strlen(att_data));
+		whynotwork(POTATO_Save.POTATO_NAME, data_length, att_data, 1);
+	}
+	else if(handle == (POTATO_Context.POTATO_IP_Hdle)+1)
+	{
+		printf("4\n");
+		//memcpy(&(POTATO_Save.POTATO_IP),att_data,strlen(att_data));
+		whynotwork(POTATO_Save.POTATO_IP, data_length, att_data, 0);
+	}
+	else if(handle == (POTATO_Context.POTATO_OP_Hdle)+1)
+	{
+		printf("5\n");
+		//memcpy(&(POTATO_Save.POTATO_OP),att_data,strlen(att_data));
+		whynotwork(POTATO_Save.POTATO_OP, data_length, att_data, 0);
+	}
+	else if(handle == (POTATO_Context.POTATO_Save_Hdle)+1)
+	{
+		printf("6\n");
+		switch(*att_data)
+		{
+			case potato_save_opcode :
+			{
+				ret = Potato_Save(&POTATO_Save);
+				printf("Potato Save ret : %d\n",Potato_Save(&POTATO_Save));
+				break;
+			}
+			case potato_load_opcode :
+			{
+				Potato_Load(&POTATO_Save);
+				printf("Potato Load ret : %d\n",Potato_Load(&POTATO_Save));
+				break;
+			}
+			case potato_backup_to_normal_opcode :
+			{
+				Potato_Backup_Load();
+				break;
+			}
+			case potato_erase_normal_opcode :
+			{
+				Potato_Erase(normal);
+				break;
+			}
+			case potato_erase_both_opcode :
+			{
+				Potato_Erase(both);
+				break;
+			}
+			case potato_dummy_backup_opcode :
+			{
+				Potato_Dummy_Backup();
+				break;
+			}
+
+		}
+	}
+
+
 }
+
+void Read_Request_CB(uint16_t handle)
+{
+	uint8_t buffer[5] = {0, };
+	long adc_buffer = 0;
+	if(handle == POTATO_Context.POTATO_Adc_Hdle + 1){
+		adc_buffer = Potato_Readadc();
+		sprintf(buffer,"%ld",adc_buffer);
+		aci_gatt_update_char_value(POTATO_Context.POTATO_Svc_Hdle, POTATO_Context.POTATO_Adc_Hdle, 0, 5, buffer);
+	}
+
+	if(connection_handle != 0){
+	aci_gatt_allow_read(connection_handle);
+	}
+}
+
 
 /**
  * @brief  This function is called when there is a LE Connection Complete event.
@@ -412,7 +548,7 @@ void user_notify(void * pData)
         break;
       case EVT_BLUE_GATT_DISC_READ_CHAR_BY_UUID_RESP:
         if(BLE_Role == CLIENT) {
-          PRINTF("EVT_BLUE_GATT_DISC_READ_CHAR_BY_UUID_RESP\n");
+          printf("EVT_BLUE_GATT_DISC_READ_CHAR_BY_UUID_RESP\n");
 
           evt_gatt_disc_read_char_by_uuid_resp *resp = (void*)blue_evt->data;
 

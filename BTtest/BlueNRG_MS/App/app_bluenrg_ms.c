@@ -33,6 +33,8 @@
 #include "bluenrg_gatt_aci.h"
 #include "bluenrg_hal_aci.h"
 #include "bluenrg_gap.h"
+#include "save.h"
+
 
 /* USER CODE BEGIN Includes */
 
@@ -72,19 +74,9 @@ volatile uint8_t SPIwasLocked = 0;
 
 /* USER CODE BEGIN PV */
 
-typedef struct{
-  uint16_t  POTATO_Svc_Hdle;              /**< Service handle */
-  uint16_t  POTATO_SSID_Hdle;             /**< Characteristic handle */
-  uint16_t  POTATO_PW_Hdle;
-  uint16_t  POTATO_NAME_Hdle;
-  uint16_t  POTATO_IP_Hdle;
-  uint16_t  POTATO_OP_Hdle;
-  uint16_t  POTATO_Save_Hdle;
-  uint16_t  POTATO_Adc_Hdle;
+extern POTATO_Save_t POTATO_Save;
 
-}POTATO_Context_t;
 
-POTATO_Context_t POTATO_Context;
 
 /* USER CODE END PV */
 
@@ -117,7 +109,7 @@ void MX_BlueNRG_MS_Init(void)
 
 	const char *name = "test";
 
-	uint8_t POTATO_UUID[] = {0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x99,0xAA,0xBB,0xCC,0xDD,0xEE,0xFF,0x00};
+
 	uint8_t SERVER_BDADDR[] = {0x01,0x02,0x03,0x04,0x05,0x06};
 	uint8_t bdaddr[BDADDR_SIZE];
 
@@ -135,44 +127,9 @@ void MX_BlueNRG_MS_Init(void)
 
 	aci_gap_init_IDB05A1(GAP_PERIPHERAL_ROLE_IDB05A1, 0, 0x07, &service_handle, &dev_name_char_handle, &appearance_char_handle);
 
-	aci_gatt_update_char_value(service_handle, dev_name_char_handle, 0, strlen(name), name);
+	aci_gatt_update_char_value(service_handle, dev_name_char_handle, 0, strlen(POTATO_Save.POTATO_NAME), POTATO_Save.POTATO_NAME);
 
-	aci_gatt_add_serv(UUID_TYPE_128, POTATO_UUID, PRIMARY_SERVICE, 30, &(POTATO_Context.POTATO_Svc_Hdle));
-
-	POTATO_UUID[15] = 0x01;
-	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 31,
-					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
-					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_SSID_Hdle));
-
-	POTATO_UUID[15] = 0x02;
-	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 31,
-					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
-					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_PW_Hdle));
-
-	POTATO_UUID[15] = 0x03;
-	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 31,
-					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
-					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_NAME_Hdle));
-
-	POTATO_UUID[15] = 0x04;
-	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 4,
-					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
-					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_IP_Hdle));
-
-	POTATO_UUID[15] = 0x05;
-	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 1,
-					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
-					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_OP_Hdle));
-
-	POTATO_UUID[15] = 0x06;
-	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 2,
-					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
-					  ATTR_PERMISSION_NONE, GATT_NOTIFY_ATTRIBUTE_WRITE, 10, 1, &(POTATO_Context.POTATO_Save_Hdle));
-
-	POTATO_UUID[15] = 0x07;
-	aci_gatt_add_char(POTATO_Context.POTATO_Svc_Hdle, UUID_TYPE_128, POTATO_UUID, 5,
-					  CHAR_PROP_WRITE_WITHOUT_RESP|CHAR_PROP_READ,
-					  ATTR_PERMISSION_NONE, GATT_NOTIFY_READ_REQ_AND_WAIT_FOR_APPL_RESP, 10, 1, &(POTATO_Context.POTATO_Adc_Hdle));
+	Add_Sample_Service();
 
 
 
@@ -202,7 +159,7 @@ void MX_BlueNRG_MS_Process(void)
 
 	tBleStatus ret;
 
-	ret = aci_gap_set_discoverable(ADV_IND, 0, 0, PUBLIC_ADDR, NO_WHITE_LIST_USE, sizeof(local_name), local_name, 0, NULL, 0, 0);
+	ret = aci_gap_set_discoverable(ADV_IND, 0, 0, PUBLIC_ADDR, NO_WHITE_LIST_USE, strlen(POTATO_Save.POTATO_NAME), POTATO_Save.POTATO_NAME, 0, NULL, 0, 0);
 
 
 	if (SPIwasLocked == 1)
@@ -321,13 +278,4 @@ void BSP_PB_Callback(Button_TypeDef Button)
   user_button_pressed = 1;
 }
 
-void POTATO_Test_CB(uint16_t handle)
-{
-	printf("testCB called");
-}
-
-void Read_Request_CB(uint16_t handle)
-{
-	printf("Read_Request_CB");
-}
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

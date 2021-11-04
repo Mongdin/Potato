@@ -58,7 +58,8 @@ BlueNRG_MS/App/app_bluenrg_ms.o: ../BlueNRG_MS/App/app_bluenrg_ms.c \
  ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gatt_server.h \
  ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap_aci.h \
  ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gatt_aci.h \
- ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_hal_aci.h
+ ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_hal_aci.h \
+ ../Core/Inc/save.h
 
 ../BlueNRG_MS/App/app_bluenrg_ms.h:
 
@@ -185,3 +186,5 @@ BlueNRG_MS/App/app_bluenrg_ms.o: ../BlueNRG_MS/App/app_bluenrg_ms.c \
 ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gatt_aci.h:
 
 ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_hal_aci.h:
+
+../Core/Inc/save.h:

@@ -56,7 +56,8 @@ BlueNRG_MS/App/sample_service.o: ../BlueNRG_MS/App/sample_service.c \
  ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gap_aci.h \
  ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_gatt_aci.h \
  ../Middlewares/ST/BlueNRG-MS/includes/bluenrg_hal_aci.h \
- ../Drivers/BSP/B-L475E-IOT01A1/b_l475e_iot01a1.h ../Core/Inc/main.h
+ ../Drivers/BSP/B-L475E-IOT01A1/b_l475e_iot01a1.h ../Core/Inc/main.h \
+ ../Core/Inc/save.h ../Core/Inc/adc.h
 
 ../BlueNRG_MS/App/sample_service.h:
 
@@ -177,3 +178,7 @@ BlueNRG_MS/App/sample_service.o: ../BlueNRG_MS/App/sample_service.c \
 ../Drivers/BSP/B-L475E-IOT01A1/b_l475e_iot01a1.h:
 
 ../Core/Inc/main.h:
+
+../Core/Inc/save.h:
+
+../Core/Inc/adc.h:
