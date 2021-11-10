@@ -20,6 +20,7 @@
 #include "main.h"
 #include "save.h"
 #include "adc.h"
+#include "LPMwRTC.h"
 
 /* Private defines -----------------------------------------------------------*/
 
@@ -50,6 +51,7 @@ uint8_t RemoteIP[] = {192,168,0,2};
 /* Private variables ---------------------------------------------------------*/
 #if defined (TERMINAL_USE)
 extern UART_HandleTypeDef hDiscoUart;
+RTC_HandleTypeDef hrtc;
 #endif /* TERMINAL_USE */
 static uint8_t RxData [500];
 
@@ -65,8 +67,12 @@ static uint8_t RxData [500];
 #endif /* __GNUC__ */
 #endif /* TERMINAL_USE */
 
-static void SystemClock_Config(void);
+
 void MX_ADC1_Init(void);
+void SystemClock_Config(void);
+static void MX_RTC_Init(void);
+void RTC_WKUP_IRQHandler(void);
+
 
 
 
@@ -83,6 +89,7 @@ extern  SPI_HandleTypeDef hspi;
 int main(void)
 {
   SCB->VTOR = 0x08020000;
+  __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
   uint8_t  MAC_Addr[6];
   uint8_t  IP_Addr[4];
   uint8_t TxData[100] = {0,};
@@ -99,6 +106,7 @@ int main(void)
   SystemClock_Config();
   /* Configure LED2 */
   BSP_LED_Init(LED2);
+  MX_RTC_Init();
 
 #if defined (TERMINAL_USE)
   /* Initialize all configured peripherals */
@@ -229,10 +237,20 @@ int main(void)
 	sprintf(TxData,"current = %ld mA\n",adc_mA);
 	TERMOUT(TxData);
 	sprintf(TxData,"%ld\n",adc_mA);
+
+	while(Socket == -1)
+	{
+		if(Socket != -1)
+		{
+			break;
+		}
+		HAL_Delay(500);
+		TERMOUT("Socket -1?\n");
+	}
     if(Socket != -1)
     {
 
-    	/*
+      /*
       ret = WIFI_ReceiveData(Socket, RxData, sizeof(RxData)-1, &Datalen, WIFI_READ_TIMEOUT);
       if(ret == WIFI_STATUS_OK)
       {
@@ -253,8 +271,6 @@ int main(void)
         TERMOUT("> ERROR : Failed to Receive Data, connection closed\n");
         break;
       }*/
-
-
     	ret = WIFI_SendData(Socket, TxData, strlen(TxData), &Datalen, WIFI_WRITE_TIMEOUT);
     	          if (ret != WIFI_STATUS_OK)
     	          {
@@ -262,11 +278,9 @@ int main(void)
     	            break;
     	          }
     	          TERMOUT("Sended\n");
-    	          HAL_Delay(1000);
-
-
     }
-
+    TERMOUT("Entering standby mode\n");
+    Potato_enter_standby();
   }
 }
 
@@ -289,13 +303,14 @@ int main(void)
   * @param  None
   * @retval None
   */
-static void SystemClock_Config(void)
+void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* MSI is enabled after System reset, activate PLL with MSI as source */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE|RCC_OSCILLATORTYPE_MSI;
+  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
@@ -506,6 +521,36 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
   /* USER CODE END ADC1_MspInit 1 */
   }
 }
+
+
+static void MX_RTC_Init(void)
+{
+
+  hrtc.Instance = RTC;
+  hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+  hrtc.Init.AsynchPrediv = 127;
+  hrtc.Init.SynchPrediv = 255;
+  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+  hrtc.Init.OutPutRemap = RTC_OUTPUT_REMAP_NONE;
+  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+  if (HAL_RTC_Init(&hrtc) != HAL_OK)
+  {
+    printf("RTC Init error\n");
+  }
+
+}
+void RTC_WKUP_IRQHandler(void)
+{
+  /* USER CODE BEGIN RTC_WKUP_IRQn 0 */
+
+  /* USER CODE END RTC_WKUP_IRQn 0 */
+  HAL_RTCEx_WakeUpTimerIRQHandler(&hrtc);
+  /* USER CODE BEGIN RTC_WKUP_IRQn 1 */
+
+  /* USER CODE END RTC_WKUP_IRQn 1 */
+}
+
 /*
 void potato_get_string(){
 	//POTATO.POTATO_SSID

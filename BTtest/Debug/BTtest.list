@@ -3101,6 +3101,7 @@ int main(void)
  80118c4:	f000 f906 	bl	8011ad4 <MX_GPIO_Init>
   MX_ADC1_Init();
  80118c8:	f000 f85e 	bl	8011988 <MX_ADC1_Init>
+
   MX_USART1_UART_Init();
  80118cc:	f000 f8d2 	bl	8011a74 <MX_USART1_UART_Init>
   MX_BlueNRG_MS_Init();

@@ -96,6 +96,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_ADC1_Init();
+
   MX_USART1_UART_Init();
   MX_BlueNRG_MS_Init();
   /* USER CODE BEGIN 2 */
@@ -473,7 +474,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
 
 
 /* USER CODE END 4 */

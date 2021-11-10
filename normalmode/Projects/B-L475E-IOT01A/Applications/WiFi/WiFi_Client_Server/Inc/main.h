@@ -28,6 +28,7 @@
 #include <string.h>
 
 void SPI3_IRQHandler(void);
+void SystemClock_Config(void);
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

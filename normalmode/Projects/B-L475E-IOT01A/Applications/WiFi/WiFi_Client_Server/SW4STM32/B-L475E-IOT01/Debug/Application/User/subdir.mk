@@ -5,6 +5,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Application/User/LPMwRTC.c \
 ../Application/User/adc.c \
 ../Application/User/crc.c \
 D:/git/Potato/normalmode/Projects/B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Src/main.c \
@@ -12,6 +13,7 @@ D:/git/Potato/normalmode/Projects/B-L475E-IOT01A/Applications/WiFi/WiFi_Client_S
 D:/git/Potato/normalmode/Projects/B-L475E-IOT01A/Applications/WiFi/WiFi_Client_Server/Src/stm32l4xx_it.c 
 
 OBJS += \
+./Application/User/LPMwRTC.o \
 ./Application/User/adc.o \
 ./Application/User/crc.o \
 ./Application/User/main.o \
@@ -19,6 +21,7 @@ OBJS += \
 ./Application/User/stm32l4xx_it.o 
 
 C_DEPS += \
+./Application/User/LPMwRTC.d \
 ./Application/User/adc.d \
 ./Application/User/crc.d \
 ./Application/User/main.d \

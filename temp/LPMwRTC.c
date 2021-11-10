@@ -1,6 +1,6 @@
 #include "LPMwRTC.h"
 
-
+extern RTC_HandleTypeDef hrtc;
 
 //wakeup counter 2000 : 1sec
 void Potato_enter_sleep(void){

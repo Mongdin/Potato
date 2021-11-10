@@ -1,0 +1,4 @@
+LPMwRTC.c:6:6:Potato_enter_sleep	16	static
+LPMwRTC.c:13:6:Potato_enter_stop	16	static
+LPMwRTC.c:20:6:Potato_enter_standby	16	static
+LPMwRTC.c:27:6:HAL_RTCEx_WakeUpTimerEventCallback	16	static
