@@ -8,7 +8,7 @@ sample_service.c:288:6:enableNotification	16	static
 sample_service.c:302:6:whynotwork	32	static
 sample_service.c:321:6:Attribute_Modified_CB	24	static
 sample_service.c:409:6:Read_Request_CB	40	static
-sample_service.c:431:6:GAP_ConnectionComplete_CB	24	static
-sample_service.c:448:6:GAP_DisconnectionComplete_CB	8	static
-sample_service.c:469:6:GATT_Notification_CB	16	static
-sample_service.c:483:6:user_notify	56	static
+sample_service.c:432:6:GAP_ConnectionComplete_CB	24	static
+sample_service.c:449:6:GAP_DisconnectionComplete_CB	8	static
+sample_service.c:470:6:GATT_Notification_CB	16	static
+sample_service.c:484:6:user_notify	56	static

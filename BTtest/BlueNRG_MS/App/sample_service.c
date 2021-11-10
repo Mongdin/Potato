@@ -413,6 +413,7 @@ void Read_Request_CB(uint16_t handle)
 	if(handle == POTATO_Context.POTATO_Adc_Hdle + 1){
 		adc_buffer = Potato_Readadc();
 		sprintf(buffer,"%ld",adc_buffer);
+		printf("%s\n",buffer);
 		aci_gatt_update_char_value(POTATO_Context.POTATO_Svc_Hdle, POTATO_Context.POTATO_Adc_Hdle, 0, 5, buffer);
 	}
 

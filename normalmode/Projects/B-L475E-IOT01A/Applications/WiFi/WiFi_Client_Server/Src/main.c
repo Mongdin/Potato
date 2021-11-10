@@ -115,6 +115,7 @@ int main(void)
 
   BSP_COM_Init(COM1, &hDiscoUart);
 #endif /* TERMINAL_USE */
+
   Potato_Load(&POTATO);
   TERMOUT("Load done\n");
 
