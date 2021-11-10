@@ -1,5 +1,0 @@
-hr.c:560:13:ConnMgr	0	static
-hr.c:342:6:Adv_Request	56	static
-hr.c:225:6:HR_Init	32	static
-hr.c:335:6:HR_AdvUpdate	0	static
-hr.c:449:6:SVCCTL_App_Notification	16	static

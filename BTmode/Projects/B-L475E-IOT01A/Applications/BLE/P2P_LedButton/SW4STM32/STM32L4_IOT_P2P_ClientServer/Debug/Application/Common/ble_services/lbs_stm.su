@@ -1,4 +1,0 @@
-lbs_stm.c:248:6:LBS_STM_Init	56	static
-lbs_stm.c:415:12:BLE_SVC_LedButton_Update_Char	16	static
-lbs_stm.c:452:13:LBS_App_Notification	0	static
-lbs_stm.c:82:30:LedButton_Event_Handler	40	static

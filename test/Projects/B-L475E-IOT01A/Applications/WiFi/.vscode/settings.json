@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "main.h": "c",
-        "wifi.h": "c",
-        "es_wifi.h": "c",
-        "es_wifi_io.h": "c",
-        "es_wifi_conf.h": "c"
-    }
-}

@@ -1,5 +1,0 @@
-save.c:30:12:Potato_Save	64	static,ignoring_inline_asm
-save.c:107:12:Potato_Load	120	static
-save.c:147:12:Potato_Erase	40	static,ignoring_inline_asm
-save.c:181:12:Potato_Backup_Load	40	static,ignoring_inline_asm
-save.c:226:12:Potato_Dummy_Backup	40	static,ignoring_inline_asm
