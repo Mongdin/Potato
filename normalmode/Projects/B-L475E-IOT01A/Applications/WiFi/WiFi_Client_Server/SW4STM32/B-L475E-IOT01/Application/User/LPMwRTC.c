@@ -27,9 +27,11 @@ void Potato_enter_standby(void){
 void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc){
 
 	SystemClock_Config();
+	SystemCoreClockUpdate();
 	HAL_ResumeTick();
 	HAL_RTCEx_DeactivateWakeUpTimer(hrtc);
 	printf("exit stop\n");
 
 }
+
 

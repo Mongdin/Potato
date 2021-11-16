@@ -104,9 +104,12 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
+
+
   /* Configure LED2 */
   BSP_LED_Init(LED2);
   MX_RTC_Init();
+
 
 #if defined (TERMINAL_USE)
   /* Initialize all configured peripherals */
@@ -124,6 +127,8 @@ int main(void)
   BSP_COM_Init(COM1, &hDiscoUart);
 #endif /* TERMINAL_USE */
 
+
+  TERMOUT("sysclock : %d\n",HAL_RCC_GetSysClockFreq());
   Potato_Load(&POTATO);
   TERMOUT("Load done\n");
 
@@ -347,6 +352,7 @@ void SystemClock_Config(void)
     /* Initialization Error */
     while(1);
   }
+  HAL_RCCEx_EnableMSIPLLMode();
 }
 
 #if defined (TERMINAL_USE)
@@ -559,6 +565,34 @@ void RTC_WKUP_IRQHandler(void)
   /* USER CODE END RTC_WKUP_IRQn 1 */
 }
 
+void HAL_RTC_MspInit(RTC_HandleTypeDef* hrtc)
+{
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+  if(hrtc->Instance==RTC)
+  {
+  /* USER CODE BEGIN RTC_MspInit 0 */
+
+  /* USER CODE END RTC_MspInit 0 */
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+    PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
+      TERMOUT("RTC CLKConfig error\n");
+    }
+
+    /* Peripheral clock enable */
+    __HAL_RCC_RTC_ENABLE();
+    /* RTC interrupt Init */
+    HAL_NVIC_SetPriority(RTC_WKUP_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(RTC_WKUP_IRQn);
+  /* USER CODE BEGIN RTC_MspInit 1 */
+
+  /* USER CODE END RTC_MspInit 1 */
+  }
+
+}
 /*
 void potato_get_string(){
 	//POTATO.POTATO_SSID
